@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_batch_update,access_hr_employee_batch_update,model_hr_employee_batch_update,base.group_user,1,1,1,1
+

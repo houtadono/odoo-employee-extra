@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_hr_employee_extra_form" model="ir.ui.view">
+            <field name="name">hr.employee.extra.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_do_something" class="oe_stat_button" icon="fa-briefcase"
+                            type="object" groups="employee_extra.group_hr_employee_experience_manager">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field string="Update" name="years_of_experience" readonly="1"/>
+                            </span>
+                            <span class="o_stat_text">Update</span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='work_email']" position="after">
+                    <field name="years_of_experience"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        <record id="view_hr_employee_extra_form1" model="ir.ui.view">-->
+        <!--            <field name="name">hr.employee.extra.form1</field>-->
+        <!--            <field name="model">hr.employee</field>-->
+        <!--            <field name="inherit_id" ref="hr.view_employee_form_smartbutton"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//button[@name='action_related_contacts']" position="attributes">-->
+        <!--                    <attribute name="invisible">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="view_hr_employee_extra_tree" model="ir.ui.view">
+            <field name="name">hr.employee.extra.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                        <button name="%(action_hr_employee_batch_update_wizard)d" type="action"
+                                class="btn-primary" icon="fa-tasks" string="Batch Update"/>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="years_of_experience"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_hr_employee_extra_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.extra.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="employee_extra.view_hr_employee_extra_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="groups">employee_extra.group_hr_employee_experience_manager</attribute>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="attributes">
+                    <attribute name="groups">employee_extra.group_hr_employee_experience_manager_extend</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
