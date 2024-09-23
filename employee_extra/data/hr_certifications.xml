@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="certification_data_science" model="hr.certifications">
+            <field name="name">Data Science Certification</field>
+            <field name="description">Certification for data analysis and machine learning skills.</field>
+        </record>
+
+        <record id="certification_web_development" model="hr.certifications">
+            <field name="name">Web Development Certification</field>
+            <field name="description">Certification for proficiency in web development.</field>
+        </record>
+
+        <record id="certification_cloud_architect" model="hr.certifications">
+            <field name="name">Cloud Architect Certification</field>
+            <field name="description">Certification for skills in cloud architecture and deployment.</field>
+        </record>
+
+        <record id="certification_network_security" model="hr.certifications">
+            <field name="name">Network Security Certification</field>
+            <field name="description">Certification for network security knowledge and practices.</field>
+        </record>
+
+        <record id="certification_project_management" model="hr.certifications">
+            <field name="name">Project Management Certification</field>
+            <field name="description">Certification for project management skills and methodologies.</field>
+        </record>
+
+        <record id="certification_ux_design" model="hr.certifications">
+            <field name="name">UX Design Certification</field>
+            <field name="description">Certification for skills in user experience design.</field>
+        </record>
+
+        <record id="certification_devops" model="hr.certifications">
+            <field name="name">DevOps Certification</field>
+            <field name="description">Certification for DevOps practices and tools.</field>
+        </record>
+
+        <record id="certification_speech_communication" model="hr.certifications">
+            <field name="name">Public Speaking Certification</field>
+            <field name="description">Certification for skills in public speaking and communication.</field>
+        </record>
+
+        <record id="certification_music_production" model="hr.certifications">
+            <field name="name">Music Production Certification</field>
+            <field name="description">Certification for skills in music production and audio engineering.</field>
+        </record>
+
+    </data>
+</odoo>

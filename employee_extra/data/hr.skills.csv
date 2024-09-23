@@ -1,0 +1,33 @@
+id,name,description,skill_type_id/id
+skill_python,Python,"Expertise in Python programming language.",skill_type_development
+skill_java,Java,"Expertise in Java programming language.",skill_type_development
+skill_web_development,Web Development,"Knowledge of HTML, CSS, and JavaScript.",skill_type_development
+skill_database_management,Database Management,"Managing relational and non-relational databases.",skill_type_development
+skill_automation_ci_cd,Automation (CI/CD),"Automation skills for continuous integration and continuous deployment.",skill_type_development
+skill_cloud_computing,Cloud Computing,"Kỹ năng triển khai và quản lý ứng dụng trên các nền tảng điện toán đám mây như AWS, GCP, và Azure.",skill_type_development
+skill_data_analysis_visualization,Data Analysis & Visualization,"Kỹ năng phân tích dữ liệu và trực quan hóa thông tin thông qua các công cụ như Power BI, Tableau.",skill_type_development
+skill_github,Github,"Knowledge of version control using Git and Github.",skill_type_development
+skill_html_css,HTML & CSS,"Kỹ năng xây dựng và thiết kế website cơ bản với HTML và CSS.",skill_type_development
+skill_network_security,Network Security,"Kiến thức về bảo mật mạng, bao gồm firewall, VPN, mã hóa, và bảo mật các hệ thống mạng phức tạp.",skill_type_development
+skill_odoo_dev,Odoo Dev,"Development skills specific to Odoo platform.",skill_type_development
+skill_statistics,Statistics,"Expertise in statistical analysis and methods.",skill_type_development
+skill_firewall,Firewall,"Expertise in configuring and managing firewall systems for network security.",skill_type_development
+skill_ux_design,UX Design,"Expertise in designing user experiences and interfaces.",skill_type_development
+skill_javascript,JavaScript,"Expertise in JavaScript programming language.",skill_type_development
+
+skill_english,English,"Fluency in English.",skill_type_language
+skill_french,French,"Fluency in French.",skill_type_language
+skill_spanish,Spanish,"Fluency in Spanish.",skill_type_language
+skill_german,German,"Fluency in German.",skill_type_language
+
+skill_guitar,Guitar,"Ability to play guitar.",skill_type_music
+skill_piano,Piano,"Ability to play piano.",skill_type_music
+skill_singing,Singing,"Vocal performance skills.",skill_type_music
+skill_composing,Composing,"Ability to compose music.",skill_type_music
+skill_music_production,Music Production,"Skills in music production and audio engineering.",skill_type_music
+
+skill_team_leadership,Team Leadership,"Leading and managing a team.",skill_type_management
+skill_project_management,Project Management,"Overseeing and managing projects.",skill_type_management
+skill_communication,Communication,"Effective verbal and written communication.",skill_type_management
+skill_problem_solving,Problem Solving,"Ability to analyze and solve complex problems.",skill_type_management
+skill_public_speaking_communication,Public Speaking & Communication,"Expertise in public speaking and effective communication.",skill_type_management

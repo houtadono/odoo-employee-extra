@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        Manage Skills -->
+        <record id="view_hr_manage_skills_form" model="ir.ui.view">
+            <field name="name">hr.skills.form</field>
+            <field name="model">hr.skills</field>
+            <field name="arch" type="xml">
+                <form string="Manage Skills">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_manage_skills_tree" model="ir.ui.view">
+            <field name="name">hr.skills.tree</field>
+            <field name="model">hr.skills</field>
+            <field name="arch" type="xml">
+                <tree string="Skills">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        Skill Level -->
+        <record id="view_hr_manage_skills_level_form" model="ir.ui.view">
+            <field name="name">hr.skills.level.form</field>
+            <field name="model">hr.skills.level</field>
+            <field name="arch" type="xml">
+                <form string="Manage Skills">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="rating"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        Manage Skill Types -->
+        <record id="view_hr_manage_skills_type_form" model="ir.ui.view">
+            <field name="name">hr.skills.type.form</field>
+            <field name="model">hr.skills.type</field>
+            <field name="arch" type="xml">
+                <form string="Manage Skill Types">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="skill_ids"/>
+                        </group>
+                        <separator string="Skill Levels"/>
+                        <field name="skill_level_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="rating" widget="progressbar"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_manage_skills_type_tree" model="ir.ui.view">
+            <field name="name">hr.skills.type.tree</field>
+            <field name="model">hr.skills.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Manage Skill Types">
+                    <field name="name"/>
+                    <field name="skill_ids" widget="many2many_tags"/>
+                    <field name="skill_level_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        Employee with Skills-->
+        <record id="view_hr_employee_skills_tree" model="ir.ui.view">
+            <field name="name">hr.employees.skills.tree</field>
+            <field name="model">hr.employee.skills</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Skills">
+                    <field name="employee_id"/>
+                    <field name="skill_type_id"/>
+                    <field name="skill_id"/>
+                    <field name="skill_level_id"/>
+                    <field name="rating" widget="progressbar"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_employee_skills_form" model="ir.ui.view">
+            <field name="name">hr.employee.skills.form</field>
+            <field name="model">hr.employee.skills</field>
+            <field name="arch" type="xml">
+                <form string="Skills" class="o_hr_skills_dialog_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" invisible="1"/>
+                                <field name="skill_type_id" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="skill_id" options="{'no_open': True, 'no_create_edit': True}"
+                                       context="{'default_skill_type_id': skill_type_id}"
+                                       domain="[('skill_type_id', '=', skill_type_id)]"
+                                       attrs="{'invisible': [('skill_type_id', '=', False)]}"/>
+                                <label for="skill_level_id"
+                                       attrs="{'invisible': ['|', ('skill_id', '=', False), ('skill_type_id', '=', False)]}"/>
+                                <div class="o_row"
+                                     attrs="{'invisible': ['|', ('skill_id', '=', False), ('skill_type_id', '=', False)]}">
+
+                                    <field name="skill_level_id"
+                                           attrs="{'readonly': [('skill_id', '=', False)]}"
+                                           context="{'from_skill_level_dropdown': True, 'default_skill_type_id': skill_type_id}"/>
+
+                                    <field name="rating" widget="progressbar"
+                                           attrs="{'invisible': [('skill_level_id', '=', False)]}"/>
+                                </div>
+                                <field name="is_skill_in_cert"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hr_employee_skills_search" model="ir.ui.view">
+            <field name="name">hr.employee.skills.search</field>
+            <field name="model">hr.employee.skills</field>
+            <field name="arch" type="xml">
+                <search string="Employee Skills">
+                    <group expand="1" string="Group By">
+                        <filter string="Employee" name="employee_skills" domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

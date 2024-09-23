@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_hr_certifications_form" model="ir.ui.view">
+            <field name="name">hr.certifications.form</field>
+            <field name="model">hr.certifications</field>
+            <field name="arch" type="xml">
+                <form string="Certifications">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                        <field name="certification_skills_ids">
+                            <tree>
+                                <field name="skill_id"/>
+                                <field name="skill_type_id"/>
+                                <field name="skill_level_id"/>
+                                <field name="rating" widget="progressbar"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_hr_certifications_tree" model="ir.ui.view">
+            <field name="name">hr.certifications.tree</field>
+            <field name="model">hr.certifications</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Certifications">
+                    <field name="name"/>
+                    <field name="certification_skills_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_certification_skills_form" model="ir.ui.view">
+            <field name="name">hr.certifications.skills.form</field>
+            <field name="model">hr.certifications.skills</field>
+            <field name="arch" type="xml">
+                <form string="Cert Skills" class="o_hr_skills_dialog_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="certification_id" invisible="1"/>
+                                <field name="skill_type_id" widget="radio"/>
+                            </group>
+
+                            <group>
+                                <field name="skill_id" options="{'no_open': True, 'no_create_edit': True}"
+                                       context="{'default_skill_type_id': skill_type_id}"
+                                       domain="[('skill_type_id', '=', skill_type_id)]"
+                                       attrs="{'invisible': [('skill_type_id', '=', False)]}"/>
+
+                                <label for="skill_level_id"
+                                       attrs="{'invisible': ['|', ('skill_id', '=', False), ('skill_type_id', '=', False)]}"/>
+
+                                <div class="o_row"
+                                     attrs="{'invisible': ['|', ('skill_id', '=', False), ('skill_type_id', '=', False)]}">
+
+                                    <field name="skill_level_id"
+                                           attrs="{'readonly': [('skill_id', '=', False)]}"
+                                           context="{'from_skill_level_dropdown': True, 'default_skill_type_id': skill_type_id}"/>
+
+                                    <field name="rating" widget="progressbar"
+                                           attrs="{'invisible': [('skill_level_id', '=', False)]}"/>
+                                </div>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
