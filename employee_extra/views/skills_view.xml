@@ -85,7 +85,7 @@
             <field name="name">hr.employees.skills.tree</field>
             <field name="model">hr.employee.skills</field>
             <field name="arch" type="xml">
-                <tree string="Employee Skills">
+                <tree expand="1" string="Employee Skills" delete="false">
                     <field name="employee_id"/>
                     <field name="skill_type_id"/>
                     <field name="skill_id"/>
@@ -123,7 +123,6 @@
                                     <field name="rating" widget="progressbar"
                                            attrs="{'invisible': [('skill_level_id', '=', False)]}"/>
                                 </div>
-                                <field name="is_skill_in_cert"/>
                             </group>
                         </group>
                     </sheet>
@@ -139,11 +138,14 @@
                     <group expand="1" string="Group By">
                         <filter string="Employee" name="employee_skills" domain="[]"
                                 context="{'group_by':'employee_id'}"/>
+                        <separator/>
+                        <filter string="Skill Type" name="skill_type" domain="[]"
+                                context="{'group_by':'skill_type_id'}"/>
+                        <filter string="Skill" name="skill_id" domain="[]"
+                                context="{'group_by':'skill_id'}"/>
                     </group>
                 </search>
             </field>
         </record>
-
-
     </data>
 </odoo>

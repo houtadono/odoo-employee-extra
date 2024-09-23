@@ -15,7 +15,8 @@
 
                         <group class="d-flex">
                             <div class="d-inline-block" attrs="{'invisible': [('is_update_skills', '=', True)]}">
-                                <field name="certification_ids" groups='employee_extra.group_hr_employee_experience_manager_extend'>
+                                <field name="certification_ids"
+                                       groups='employee_extra.group_hr_employee_experience_manager_extend'>
                                     <tree>
                                         <field name="name"/>
                                     </tree>
@@ -28,6 +29,8 @@
                                             <field name="certification_skills_ids" readonly="1">
                                                 <tree>
                                                     <field name="skill_id"/>
+                                                    <field name="skill_type_id"/>
+                                                    <field name="skill_level_id"/>
                                                     <field name="rating" widget="progressbar"/>
                                                 </tree>
                                             </field>
@@ -51,7 +54,8 @@
                                     </tree>
                                 </field>
                             </div>
-                            <div class="d-inline-block" groups="employee_extra.group_hr_employee_experience_manager_extend">
+                            <div class="d-inline-block"
+                                 groups="employee_extra.group_hr_employee_experience_manager_extend">
                                 <separator string="Additional skills:"
                                            attrs="{'invisible': [('is_update_skills', '=', True)]}"/>
                                 <separator string="Result skills:"
@@ -60,6 +64,8 @@
                                     <tree>
                                         <field name="skill_id"/>
                                         <field name="rating" widget="progressbar"/>
+                                        <field name="skill_type_id" invisible="1"/>
+                                        <field name="skill_level_id" invisible="1"/>
                                     </tree>
                                 </field>
                             </div>

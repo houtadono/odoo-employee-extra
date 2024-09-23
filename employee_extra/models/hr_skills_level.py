@@ -21,9 +21,6 @@ class SkillLevel(models.Model):
             return super().name_get()
         return [(level.id, f"{level.name} ({level.rating}%)") for level in self]
 
-    def __eq__(self, other):
-        return self.rating == other.rating
-
     def __lt__(self, other):
         return self.rating < other.rating
 

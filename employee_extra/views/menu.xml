@@ -10,7 +10,7 @@
         </record>
 
         <record id="action_hr_manage_skills_type" model="ir.actions.act_window">
-            <field name="name">Skill Types</field>
+            <field name="name">Skill Type</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr.skills.type</field>
             <field name="view_mode">tree,form</field>
