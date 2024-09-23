@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        Action-->
+         <record id="action_hr_certifications" model="ir.actions.act_window">
+            <field name="name">Certifications</field>
+            <field name="res_model">hr.certifications</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="employee_extra.view_hr_certifications_tree"/>
+        </record>
+
+        <record id="action_hr_manage_skills_type" model="ir.actions.act_window">
+            <field name="name">Skill Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.skills.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="employee_extra.view_hr_manage_skills_type_tree"/>
+        </record>
+
+        <record id="action_hr_employee_skills" model="ir.actions.act_window">
+            <field name="name">Employee with Skills</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.employee.skills</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="employee_extra.view_hr_employee_skills_tree"/>
+            <field name="search_view_id" ref="employee_extra.view_hr_employee_skills_search"/>
+            <field name="context">{"search_default_employee_skills":1}</field>
+        </record>
+
+        <!--        Certifications-->
+        <menuitem
+                id="menu_hr_certifications"
+                name="Certifications"
+                parent="hr.menu_hr_root"
+                action="action_hr_certifications"
+                sequence="101"/>
+
+        <!--        Skills-->
+        <menuitem
+                id="menu_hr_skills"
+                name="Skills"
+                parent="hr.menu_hr_root"
+                sequence="102"/>
+
+        <menuitem
+                id="menu_hr_manage_skills_type"
+                parent="menu_hr_skills"
+                action="action_hr_manage_skills_type"/>
+
+        <menuitem
+                id="menu_hr_employee_skills"
+                parent="menu_hr_skills"
+                action="action_hr_employee_skills"/>
+    </data>
+</odoo>

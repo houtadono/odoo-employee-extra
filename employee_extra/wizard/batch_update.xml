@@ -5,15 +5,69 @@
             <field name="name">view.hr.employee.batch.update.wizard</field>
             <field name="model">hr.employee.batch.update</field>
             <field name="arch" type="xml">
-                <form string="Batch Update">
-                    <group>
-                        <group>
-                            <field name="years_of_experience"/>
+                <form>
+                    <sheet>
+                        <field name="is_update_skills" invisible="1"/>
+                        <field name="employee_id" invisible="1"/>
+
+                        <field name="option_update_skills" attrs="{'invisible': [('is_update_skills', '=', False)]}"
+                               widget='radio' options="{'horizontal': true}"/>
+
+                        <group class="d-flex">
+                            <div class="d-inline-block" attrs="{'invisible': [('is_update_skills', '=', True)]}">
+                                <field name="certification_ids" groups='employee_extra.group_hr_employee_experience_manager_extend'>
+                                    <tree>
+                                        <field name="name"/>
+                                    </tree>
+                                    <form string="Certifications">
+                                        <sheet>
+                                            <group>
+                                                <field name="name" readonly="1"/>
+                                                <field name="description" readonly="1"/>
+                                            </group>
+                                            <field name="certification_skills_ids" readonly="1">
+                                                <tree>
+                                                    <field name="skill_id"/>
+                                                    <field name="rating" widget="progressbar"/>
+                                                </tree>
+                                            </field>
+                                        </sheet>
+                                    </form>
+                                </field>
+                                <group>
+                                    <field name="is_update_years_of_experience_auto" widget="boolean"/>
+                                </group>
+                                <group>
+                                    <field name="years_of_experience"
+                                           attrs="{'invisible': [('is_update_years_of_experience_auto', '=', True)]}"/>
+                                </group>
+                            </div>
+                            <div class="d-inline-block" attrs="{'invisible': [('is_update_skills', '=', False)]}">
+                                <separator string="Current skills:"/>
+                                <field name="current_employee_skill_ids">
+                                    <tree>
+                                        <field name="skill_id"/>
+                                        <field name="rating" widget="progressbar"/>
+                                    </tree>
+                                </field>
+                            </div>
+                            <div class="d-inline-block" groups="employee_extra.group_hr_employee_experience_manager_extend">
+                                <separator string="Additional skills:"
+                                           attrs="{'invisible': [('is_update_skills', '=', True)]}"/>
+                                <separator string="Result skills:"
+                                           attrs="{'invisible': [('is_update_skills', '=', False)]}"/>
+                                <field name="employee_skill_ids" readonly="1">
+                                    <tree>
+                                        <field name="skill_id"/>
+                                        <field name="rating" widget="progressbar"/>
+                                    </tree>
+                                </field>
+                            </div>
                         </group>
-                    </group>
-                    <p>
-                        <field name="message"/>
-                    </p>
+                        <p>
+                            <field name="message"/>
+                        </p>
+                    </sheet>
                     <footer>
                         <button string="Update" name="action_batch_update" type="object" default_focus="1"
                                 class="btn-primary"/>

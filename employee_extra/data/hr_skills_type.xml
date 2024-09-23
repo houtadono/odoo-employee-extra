@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Skill Type: Development -->
+        <record id="skill_type_development" model="hr.skills.type">
+            <field name="name">Development</field>
+        </record>
+
+        <!-- Skill Type: Language -->
+        <record id="skill_type_language" model="hr.skills.type">
+            <field name="name">Language</field>
+        </record>
+
+        <!-- Skill Type: Music -->
+        <record id="skill_type_music" model="hr.skills.type">
+            <field name="name">Music</field>
+        </record>
+
+        <!-- Skill Type: Management -->
+        <record id="skill_type_management" model="hr.skills.type">
+            <field name="name">Management</field>
+        </record>
+    </data>
+</odoo>

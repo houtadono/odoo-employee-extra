@@ -7,7 +7,16 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button name="action_do_something" class="oe_stat_button" icon="fa-briefcase"
+                    <button name="action_update_skills" class="oe_stat_button" icon="fa-magic"
+                            type="object" groups="employee_extra.group_hr_employee_experience_manager_extend">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="number_of_skills"/>
+                            </span>
+                            <span class="o_stat_text">Skills</span>
+                        </div>
+                    </button>
+                    <button name="action_do_something" class="oe_stat_button" icon="fa-cloud-upload"
                             type="object" groups="employee_extra.group_hr_employee_experience_manager">
                         <div class="o_field_widget o_stat_info">
                             <span class="o_stat_value">
@@ -17,22 +26,63 @@
                         </div>
                     </button>
                 </xpath>
+
                 <xpath expr="//field[@name='work_email']" position="after">
                     <field name="years_of_experience"/>
                 </xpath>
+
+                <xpath expr="//page[@name='public']" position="before">
+                    <page string="Resume">
+                        <group class="d-flex mt0">
+                            <div class="d-block">
+                                <separator string="Certifications"/>
+                                <field name="certification_ids" widget="many2many_kanban">
+                                    <kanban>
+                                        <field name="name"/>
+                                        <templates style="position: relative;">
+                                            <t t-name="kanban-box">
+                                                <div>
+                                                    <a name="open_certification_view" type="object">
+                                                        <h4>
+                                                            <field name="name"/>
+                                                        </h4>
+                                                    </a>
+                                                    <div style="background-color: #f2f2f2; position: absolute;
+                                                            right: 0px; top: 0; bottom: 0; display: inline-block;
+                                                            text-align: center; padding: 4px;"
+                                                         groups="employee_extra.group_hr_employee_experience_manager_extend">
+                                                        <button type="object" name="unlink_certification"
+                                                                context="{'certi_id': id, 'employee_id': parent.id}">
+                                                            <i class="fa fa-trash" title="Delete"/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </div>
+                            <div class="d-inline-block">
+                                <separator string="Skills" class="mb-5"/>
+                                <field name="employee_skill_ids" options="{'no_create': True}">
+                                    <tree decoration-info="is_skill_in_cert == True"
+                                          decoration-success="is_skill_in_cert == False">
+                                        <field name="employee_id" invisible="1"/>
+                                        <field name="skill_id"/>
+                                        <field name="skill_level_id"/>
+                                        <field name="rating" widget="progressbar"/>
+                                        <field name="is_skill_in_cert" invisible="1"/>
+                                    </tree>
+                                </field>
+                                <button type="object" name="update_years_of_experience_base_on_skills"
+                                        class="btn-primary" string="Update year_of_experience based on skills"
+                                        groups="employee_extra.group_hr_employee_experience_manager"/>
+                            </div>
+                        </group>
+                    </page>
+                </xpath>
             </field>
         </record>
-
-        <!--        <record id="view_hr_employee_extra_form1" model="ir.ui.view">-->
-        <!--            <field name="name">hr.employee.extra.form1</field>-->
-        <!--            <field name="model">hr.employee</field>-->
-        <!--            <field name="inherit_id" ref="hr.view_employee_form_smartbutton"/>-->
-        <!--            <field name="arch" type="xml">-->
-        <!--                <xpath expr="//button[@name='action_related_contacts']" position="attributes">-->
-        <!--                    <attribute name="invisible">1</attribute>-->
-        <!--                </xpath>-->
-        <!--            </field>-->
-        <!--        </record>-->
 
         <record id="view_hr_employee_extra_tree" model="ir.ui.view">
             <field name="name">hr.employee.extra.tree</field>
@@ -40,8 +90,8 @@
             <field name="inherit_id" ref="hr.view_employee_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//header" position="inside">
-                        <button name="%(action_hr_employee_batch_update_wizard)d" type="action"
-                                class="btn-primary" icon="fa-tasks" string="Batch Update"/>
+                    <button name="%(action_hr_employee_batch_update_wizard)d" type="action"
+                            class="btn-primary" icon="fa-tasks" string="Batch Update"/>
                 </xpath>
                 <xpath expr="//field[@name='department_id']" position="after">
                     <field name="years_of_experience"/>
@@ -62,6 +112,5 @@
                 </xpath>
             </field>
         </record>
-
     </data>
 </odoo>
