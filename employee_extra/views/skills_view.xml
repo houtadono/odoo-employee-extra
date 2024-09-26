@@ -85,7 +85,7 @@
             <field name="name">hr.employees.skills.tree</field>
             <field name="model">hr.employee.skills</field>
             <field name="arch" type="xml">
-                <tree expand="1" string="Employee Skills" delete="false">
+                <tree expand="1" string="Employee Skills" delete="false" create="false">
                     <field name="employee_id"/>
                     <field name="skill_type_id"/>
                     <field name="skill_id"/>

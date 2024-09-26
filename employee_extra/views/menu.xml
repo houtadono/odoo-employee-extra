@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <!--        Action-->
-         <record id="action_hr_certifications" model="ir.actions.act_window">
+        <record id="action_hr_certifications" model="ir.actions.act_window">
             <field name="name">Certifications</field>
             <field name="res_model">hr.certifications</field>
             <field name="view_mode">tree,form</field>

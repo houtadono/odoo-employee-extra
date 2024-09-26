@@ -1,9 +1,18 @@
 from odoo import fields, models, api
+from odoo.exceptions import UserError
+from odoo.tools import groupby
 
 
 class BatchUpdate(models.TransientModel):
     _name = 'hr.employee.batch.update'
     _description = 'Batch Update Wizard'
+
+    department_selection = fields.Selection(
+        selection=lambda self: self.set_department_selection(),
+        string='Department',
+        default='all',
+    )
+    is_select_department = fields.Boolean(default=True)
 
     is_update_years_of_experience_auto = fields.Boolean(string="Auto Update Years of Experience Base On Skills",
                                                         default=False)
@@ -26,6 +35,21 @@ class BatchUpdate(models.TransientModel):
     employee_id = fields.Many2one('hr.employee', string="Employee")
     current_employee_skill_ids = fields.One2many('hr.employee.skills',
                                                  related='employee_id.employee_skill_ids', string="Current Skills")
+
+    def set_department_selection(self):
+        active_ids = self._context.get('active_ids', [])
+        employees = self.env['hr.employee'].browse(active_ids)
+
+        selection = [('all', 'All(%s)' % len(employees))]
+
+        for department, group in groupby(employees, key=lambda x: x.department_id):
+            count = len(list(group))
+            selection.append((str(department.id), f"{department.name} ({count})"))
+
+        employees_without_department = employees.filtered(lambda x: not x.department_id)
+        if employees_without_department:
+            selection.append(('no_department', 'No Department (%s)' % len(employees_without_department)))
+        return selection
 
     @api.onchange('certification_ids', 'option_update_skills')
     def _compute_update_skills(self):
@@ -68,7 +92,16 @@ class BatchUpdate(models.TransientModel):
 
         if not self.is_update_skills or self.option_update_skills == 'update2':
             # mặc định nếu chọn cert hoặc update2 thì là giữ lại hết skill tốt ngoài cert
-            for employee in employees:
+            employees_selected = employees
+            if self.department_selection:
+                if self.department_selection == 'no_department':
+                    employees_selected = employees.filtered(lambda rc: not rc.department_id)
+                elif self.department_selection.isdigit():
+                    employees_selected = employees.filtered(lambda rc: rc.department_id.id == int(self.department_selection))
+            elif self.is_select_department:
+                raise UserError("Please select Department")
+
+            for employee in employees_selected:
                 new_certs = self.certification_ids - employee.certification_ids
                 if new_certs:
                     employee.write({'certification_ids': [(4, cert.id) for cert in new_certs]})

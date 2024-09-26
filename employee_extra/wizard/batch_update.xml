@@ -9,12 +9,17 @@
                     <sheet>
                         <field name="is_update_skills" invisible="1"/>
                         <field name="employee_id" invisible="1"/>
+                        <field name="is_select_department" invisible="1"/>
 
                         <field name="option_update_skills" attrs="{'invisible': [('is_update_skills', '=', False)]}"
                                widget='radio' options="{'horizontal': true}"/>
 
                         <group class="d-flex">
                             <div class="d-inline-block" attrs="{'invisible': [('is_update_skills', '=', True)]}">
+                                <group>
+                                    <field name="department_selection"
+                                           attrs="{'invisible': [('is_select_department', '=', False)]}"/>
+                                </group>
                                 <field name="certification_ids"
                                        groups='employee_extra.group_hr_employee_experience_manager_extend'>
                                     <tree>
