@@ -43,6 +43,8 @@ class BatchUpdate(models.TransientModel):
         selection = [('all', 'All(%s)' % len(employees))]
 
         for department, group in groupby(employees, key=lambda x: x.department_id):
+            if not department:
+                continue
             count = len(list(group))
             selection.append((str(department.id), f"{department.name} ({count})"))
 
