@@ -121,6 +121,7 @@ class EmployeeExtra(models.Model):
             'context': {
                 'default_years_of_experience': self.years_of_experience,
                 'default_message': 'Update this record?',
+                'default_is_select_department': False,
             },
             'target': 'new',
         }
@@ -138,6 +139,7 @@ class EmployeeExtra(models.Model):
                 'certification_ids': self.certification_ids.ids,
                 'default_years_of_experience': self.years_of_experience,
                 'default_message': 'Update this record?',
+                'default_is_select_department': False,
             },
             'target': 'new',
         }
