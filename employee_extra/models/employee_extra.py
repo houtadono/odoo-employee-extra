@@ -13,6 +13,8 @@ class EmployeeExtra(models.Model):
     years_of_experience = fields.Integer(string="Years of Experience", default=0, tracking=True,
                                          groups="employee_extra.group_hr_employee_experience_manager")
     certification_ids = fields.Many2many('hr.certifications', string="Certifications")
+    is_certification_field_readonly = fields.Boolean(compute='_compute_certification_field_readonly')
+
     employee_skill_ids = fields.One2many('hr.employee.skills', 'employee_id', string="Skills")
     number_of_skills = fields.Integer(string="Number of Skills", compute='_compute_number_of_skills', tracking=True)
 
@@ -49,13 +51,9 @@ class EmployeeExtra(models.Model):
                     self.update_skills_based_on_certifications_plus(target_certs=added_certs)
         return res
 
-    @api.model
-    def fields_get(self, allfields=None, attributes=None):
-        res = super(EmployeeExtra, self).fields_get(allfields, attributes)
-        if not self.env.user.has_group('employee_extra.group_hr_employee_experience_manager_extend'):
-            if 'certification_ids' in res:
-                res['certification_ids']['readonly'] = True
-        return res
+    def _compute_certification_field_readonly(self):
+        self.is_certification_field_readonly = not self.env.user.has_group(
+            "employee_extra.group_hr_employee_experience_manager_extend")
 
     def get_all_best_skills_from_certifications(self, target_certs=None):
         if target_certs is None:
