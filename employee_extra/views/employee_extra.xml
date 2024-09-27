@@ -36,7 +36,9 @@
                         <group class="d-flex mt0">
                             <div class="d-block">
                                 <separator string="Certifications"/>
-                                <field name="certification_ids" widget="many2many_kanban">
+                                <field name="is_certification_field_readonly" invisible="1"/>
+                                <field name="certification_ids" widget="many2many_kanban"
+                                       attrs="{'readonly': [('is_certification_field_readonly', '=', True)]}">
                                     <kanban>
                                         <field name="name"/>
                                         <templates style="position: relative;">
