@@ -11,6 +11,8 @@ class Certifications(models.Model):
     description = fields.Text(string="Description")
     certification_skills_ids = fields.One2many('hr.certifications.skills',
                                                'certification_id', string="Certification Skills")
+    employee_ids = fields.Many2many('hr.employee', 'hr_certifications_hr_employee_rel',
+                                    'hr_certifications_id', 'hr_employee_id')
 
     @api.model_create_multi
     def create(self, vals_list):

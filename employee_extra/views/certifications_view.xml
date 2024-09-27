@@ -20,6 +20,14 @@
                                 <field name="rating" widget="progressbar"/>
                             </tree>
                         </field>
+                        <separator string="Employees with this Certification"/>
+                        <field name="employee_ids" nolabel="1" readonly="1">
+                            <tree string="Employees" default_order="department_id">
+                                <field name="name"/>
+                                <field name="job_id"/>
+                                <field name="department_id"/>
+                            </tree>
+                        </field>
                     </sheet>
                 </form>
             </field>
