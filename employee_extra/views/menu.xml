@@ -51,5 +51,13 @@
                 id="menu_hr_employee_skills"
                 parent="menu_hr_skills"
                 action="action_hr_employee_skills"/>
+
+        <!--        Graph-->
+        <menuitem
+                id="menu_hr_employee_skills_history"
+                name="Graph"
+                parent="hr.menu_hr_root"
+                action="action_hr_employee_skills_history_graph"
+                sequence="102"/>
     </data>
 </odoo>

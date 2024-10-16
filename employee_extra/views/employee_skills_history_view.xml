@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_employee_skill_history_graph" model="ir.ui.view">
+            <field name="name">hr.employee.skills.history.graph</field>
+            <field name="model">hr.employee.skills.history</field>
+            <field name="arch" type="xml">
+                <graph string="Skill Change History" type="line" stacked="0">
+                    <field name="date" interval="day" type="row"/>
+                    <field name="employee_id" type="col"/>
+                    <field name="skill_id" type="col"/>
+                    <field name="rating" type="measure"/>
+                </graph>
+            </field>
+        </record>
+        <record id="action_hr_employee_skills_history_graph" model="ir.actions.act_window">
+            <field name="name">Skill Change History</field>
+            <field name="res_model">hr.employee.skills.history</field>
+            <field name="view_mode">graph</field>
+        </record>
+    </data>
+</odoo>
