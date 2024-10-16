@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data>z
         <record id="view_hr_employee_extra_form" model="ir.ui.view">
             <field name="name">hr.employee.extra.form</field>
             <field name="model">hr.employee</field>
@@ -33,8 +33,9 @@
 
                 <xpath expr="//page[@name='public']" position="before">
                     <page string="Resume">
+                        <field name="is_show_cer" invisible="1"/>
                         <group class="d-flex mt0">
-                            <div class="d-block" style="width: 90%">
+                            <div class="d-block" style="width: 90%" attrs="{'invisible':  [('is_show_cer','=',False) ]}">
                                 <separator string="Certifications"/>
                                 <field name="is_certification_field_readonly" invisible="1"/>
                                 <field name="certification_ids" widget="many2many_kanban"
@@ -65,7 +66,16 @@
                                 </field>
                             </div>
                             <div class="d-inline-block">
-                                <separator string="Skills" class="mb-5"/>
+                                <div style="position: relative;">
+                                    <separator string="Skills" class="mb-5"/>
+                                    <div style="position: absolute; top: 0; right: 0;">
+                                        <button type="action" name="%(action_hr_employee_skills_history_graph)d"
+                                                context="{'employee_id': id}"
+                                                class="btn-primary" string="Timeline"/>
+                                    </div>
+
+                                </div>
+
                                 <field name="employee_skill_ids" options="{'no_create': True}">
                                     <tree decoration-info="is_skill_in_cert == True"
                                           decoration-success="is_skill_in_cert == False">

@@ -17,3 +17,4 @@ access_hr_skills_type_manager,access_hr_skills_type_manager,model_hr_skills_type
 
 access_hr_employee_skills_manager,access_hr_employee_skills_manager,model_hr_employee_skills,group_hr_employee_experience_manager_extend,1,1,1,1
 
+access_hr_employee_skills_history,access_hr_employee_skills_history,model_hr_employee_skills_history,hr.group_hr_user,1,1,1,1

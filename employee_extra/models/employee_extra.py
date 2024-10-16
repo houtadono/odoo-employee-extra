@@ -17,11 +17,18 @@ class EmployeeExtra(models.Model):
 
     employee_skill_ids = fields.One2many('hr.employee.skills', 'employee_id', string="Skills")
     number_of_skills = fields.Integer(string="Number of Skills", compute='_compute_number_of_skills', tracking=True)
+    is_show_cer = fields.Boolean(
+        string="Show Certificate",
+        compute='_compute_is_show_cer_if_not_skill'
+    )
 
     @api.depends('employee_skill_ids')
     def _compute_number_of_skills(self):
         for employee in self:
             employee.number_of_skills = len(employee.employee_skill_ids)
+
+    def debug(self):
+        pass
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -54,6 +61,13 @@ class EmployeeExtra(models.Model):
     def _compute_certification_field_readonly(self):
         self.is_certification_field_readonly = not self.env.user.has_group(
             "employee_extra.group_hr_employee_experience_manager_extend")
+
+    @api.depends()
+    def _compute_is_show_cer_if_not_skill(self):
+        is_show_cer_if_not_skill = self.env['ir.config_parameter'].sudo().get_param('hr_employee.is_show_cer_if_not_skill',
+                                                                       default=False)
+        for employee in self:
+            employee.is_show_cer = bool(is_show_cer_if_not_skill) or employee.employee_skill_ids
 
     def get_all_best_skills_from_certifications(self, target_certs=None):
         if target_certs is None:
